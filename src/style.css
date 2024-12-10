@@ -8,6 +8,8 @@
 html, body {
     width: 100%;
     height: 100%;
+    color: #fff7f8;
+    background-color:  #2b0f54;
 }
 
 #container {
@@ -32,7 +34,7 @@ html, body {
 }
 
 #header {
-    background-color: aqua;
+    
 }
 
 #menu, #content {
@@ -40,27 +42,29 @@ html, body {
 }
 
 #menu {
-    background-color: #fef5db;
+    color: #ff8142;
+    background-color: #fff7f8;
     display: grid;
 }
 
 #btn-project {
     align-self: end;
     padding: 12px;
-    background-color: #dd4d3f;
+    background-color: #ff8142;
     border-radius: 12px;
-    border: #dd4d3f 2px solid;
+    border: #ff8142 2px solid;
 }
 
 #btn-project:hover {
-    border: black 2px solid;
+    border: #2b0f54 2px solid;
 }
 
 #content {
-    background-color: red;
+    color:#ab1f65;
+    background-color: #fff7f8ec;
 }
 
 #footer {
-    background-color: green;
+    background-color:#2b0f54 ;
 }
 
