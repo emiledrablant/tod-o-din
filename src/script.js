@@ -1,10 +1,15 @@
 
 import "./style.css";
-import { createNewProject } from "./js/project";
-import { createNewTask } from "./js/task";
+import InterfaceManager from "./js/interface";
+import ProjectManager from "./js/project";
 
-let project1 = createNewProject();
+const interfaceManager = new InterfaceManager;
+const projectManager = new ProjectManager;
+const testo = projectManager.createProject("Testo");
+const bongo = projectManager.createProject("Bongo");
 
-project1.listOfTasks.push(createNewTask("Testo", "descriptionado", 11, false));
+testo.createTask("Faire les courses", "Aller au supermarché", 55, true);
+testo.createTask("Lessive", "Bien séparer les blancs de la couleur", 11, false);
+bongo.createTask("ca", "fsd", 55, false);
 
-console.log(project1.listOfTasks[0]);
+interfaceManager.buildInterface(projectManager);
