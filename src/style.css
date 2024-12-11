@@ -74,6 +74,13 @@ button {
     background-color: var(--alternate-highlight-color);
 }
 
+.active-project {
+    padding: 8px;
+    color: white;
+    background-color: var(--main-highlight-color);
+    border: var(--main-highlight-color) 2px solid;
+}
+
 #btn-add-project {
     align-self: center;
     padding: 12px 32px;

@@ -5,6 +5,9 @@ import ProjectManager from "./js/project";
 
 const interfaceManager = new InterfaceManager;
 const projectManager = new ProjectManager;
+
+interfaceManager.init(projectManager);
+
 const testo = projectManager.createProject("Testo");
 const bongo = projectManager.createProject("Bongo");
 
