@@ -81,6 +81,8 @@ button {
     font-weight: bold;
     background-color: var(--main-highlight-color);
     border: var(--main-highlight-color) 2px solid;
+    width: 100%;
+    font-size: 1.4rem;
 }
 
 #btn-add-project:hover {

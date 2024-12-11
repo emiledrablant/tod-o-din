@@ -16,6 +16,7 @@ export default class InterfaceManager {
             buttonProject.textContent = project.name;
 
             buttonProject.addEventListener("click", (e) => {
+                document.getElementById("task-list").textContent = '';
                 this.buildTasks(project);
             });
 
