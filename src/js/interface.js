@@ -29,6 +29,7 @@ export default class InterfaceManager {
         buttonProject.textContent = project.name;
 
         buttonProject.addEventListener("click", (e) => {
+            document.getElementById("toolbar").textContent = '';
             document.getElementById("task-list").textContent = '';
             this.buildTaskInterface(project);
             this.buildTasks(project);
@@ -49,6 +50,22 @@ export default class InterfaceManager {
     buildTaskInterface(project) {
         const header = document.getElementById("task-list-title");
         header.textContent = `List of tasks - ${project.name}`;
+
+        const toolbar = document.getElementById("toolbar");
+
+        const removeProject = document.createElement("button");
+        removeProject.classList.add("remove-project");
+        removeProject.textContent = "Remove this project";
+        removeProject.addEventListener("click", (e) => {
+            console.log("delete");
+        });
+
+        const addTask = document.createElement("button");
+        addTask.classList.add("add-task");
+        addTask.textContent = "Add a task to this project";
+
+        toolbar.appendChild(removeProject);
+        toolbar.appendChild(addTask);
     }
 
     buildTasks(project) {

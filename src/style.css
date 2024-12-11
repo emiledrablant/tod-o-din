@@ -105,6 +105,28 @@ h2 {
     margin-bottom: 48px;
 }
 
+#toolbar {
+    display: flex;
+    margin: 12px;
+    gap: 8px;
+}
+
+#toolbar button {
+    padding: 12px;
+    display: flex;
+    text-align: center; /* Doesn't work, don't know why! */
+    border: var(--alternate-highlight-color) 2px solid;
+    font-size: 1rem;
+}
+
+.remove-project {
+    flex: 1 0 auto;
+}
+
+.add-task {
+    flex: 3 0 auto;
+}
+
 .task-area {
     background-color: var(--alternate-bg-color);
     border-radius: 12px;
