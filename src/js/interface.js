@@ -1,23 +1,24 @@
 
 const menu = document.getElementById("project-list");
+const header = document.getElementById("task-list-title");
 let isCreating = false;
 
 export default class InterfaceManager {
-    constructor() {
-
+    constructor(projectManager) {
+        this.projectManager = projectManager;
     }
 
-    init(projectManager) {
+    init() {
         const buttonCreate = document.getElementById("btn-add-project");
         buttonCreate.addEventListener("click", (e) => {
             if (!isCreating) {
-                this.createProject(projectManager);
+                this.createProject();
             }
         });
     }
 
-    buildInterface(projectManager) {
-        const listOfProjects = projectManager.getListOfProjects();
+    buildInterface() {
+        const listOfProjects = this.projectManager.getListOfProjects();
         for (const project of listOfProjects) {
             this.buildProjectButton(project);
         }
@@ -29,8 +30,7 @@ export default class InterfaceManager {
         buttonProject.textContent = project.name;
 
         buttonProject.addEventListener("click", (e) => {
-            document.getElementById("toolbar").textContent = '';
-            document.getElementById("task-list").textContent = '';
+            this.resetInterface();
             this.buildTaskInterface(project);
             this.buildTasks(project);
 
@@ -48,7 +48,6 @@ export default class InterfaceManager {
     }
 
     buildTaskInterface(project) {
-        const header = document.getElementById("task-list-title");
         header.textContent = `List of tasks - ${project.name}`;
 
         const toolbar = document.getElementById("toolbar");
@@ -57,12 +56,24 @@ export default class InterfaceManager {
         removeProject.classList.add("remove-project");
         removeProject.textContent = "Remove this project";
         removeProject.addEventListener("click", (e) => {
-            console.log("delete");
+            if (project.getListOfTasks().length != 0) {
+                if (confirm("This project contains tasks.\nAre you sure you want to delete it?")) {
+                    this.deleteProject(project);
+                }
+            } else {
+                this.deleteProject(project);
+            }
         });
 
         const addTask = document.createElement("button");
         addTask.classList.add("add-task");
         addTask.textContent = "Add a task to this project";
+        addTask.addEventListener("click", (e) => {
+            project.createTask("a", "b", 0, true);
+            this.resetInterface();
+            this.buildTaskInterface(project);
+            this.buildTasks(project);
+        });
 
         toolbar.appendChild(removeProject);
         toolbar.appendChild(addTask);
@@ -99,7 +110,7 @@ export default class InterfaceManager {
         }
     }
 
-    createProject(projectManager) {
+    createProject() {
         isCreating = true;
         const inputField = document.createElement("input");
         inputField.classList.add("button-project");
@@ -110,7 +121,7 @@ export default class InterfaceManager {
         inputField.addEventListener("keydown", (e) => {
             if(e.code === "Enter") {
                 if (inputField.value != "") {
-                    const newProject = projectManager.createProject(inputField.value);
+                    const newProject = this.projectManager.createProject(inputField.value);
                     inputField.hidden = true;
                     this.buildProjectButton(newProject);
                     isCreating = false;
@@ -122,5 +133,20 @@ export default class InterfaceManager {
             menu.removeChild(inputField);
             isCreating = false;
         });
+    }
+
+    resetInterface(includingProjects = false) {
+        if(includingProjects) {
+            document.getElementById("project-list").textContent = '';
+        }
+        header.textContent = `List of tasks`;
+        document.getElementById("toolbar").textContent = '';
+        document.getElementById("task-list").textContent = '';
+    }
+
+    deleteProject(project) {
+        this.projectManager.deleteProject(project);
+        this.resetInterface(true);
+        this.buildInterface();
     }
 }

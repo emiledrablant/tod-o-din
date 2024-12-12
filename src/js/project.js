@@ -13,6 +13,15 @@ export default class ProjectManager {
         return project;
     }
 
+    deleteProject(project) {
+        for (const item of this.listOfProjects) {
+            if (item === project) {
+                const index = this.listOfProjects.indexOf(item);
+                this.listOfProjects.splice(index, 1);
+            }
+        }
+    }
+
     getListOfProjects() {
         return this.listOfProjects;
     }

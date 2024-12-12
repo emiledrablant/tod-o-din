@@ -121,10 +121,12 @@ h2 {
 
 .remove-project {
     flex: 1 0 auto;
+    background-color: #ffb5b5;
 }
 
 .add-task {
     flex: 3 0 auto;
+    background-color: #b2ff7e;
 }
 
 .task-area {
