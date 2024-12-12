@@ -30,9 +30,7 @@ export default class InterfaceManager {
         buttonProject.textContent = project.name;
 
         buttonProject.addEventListener("click", (e) => {
-            this.resetInterface();
-            this.buildTaskInterface(project);
-            this.buildTasks(project);
+            this.resetInterface(project);
 
             const allButons = document.getElementsByClassName("active-project");
             for (let button of allButons) {
@@ -70,9 +68,7 @@ export default class InterfaceManager {
         addTask.textContent = "Add a task to this project";
         addTask.addEventListener("click", (e) => {
             project.createTask("a", "b", 0, true);
-            this.resetInterface();
-            this.buildTaskInterface(project);
-            this.buildTasks(project);
+            this.resetInterface(project);
         });
 
         toolbar.appendChild(removeProject);
@@ -135,18 +131,21 @@ export default class InterfaceManager {
         });
     }
 
-    resetInterface(includingProjects = false) {
-        if(includingProjects) {
-            document.getElementById("project-list").textContent = '';
-        }
+    resetInterface(project) {
+        document.getElementById("project-list").textContent = '';
         header.textContent = `List of tasks`;
         document.getElementById("toolbar").textContent = '';
         document.getElementById("task-list").textContent = '';
+
+        this.buildInterface();
+        if (project !== null) {
+            this.buildTaskInterface(project);
+            this.buildTasks(project);
+        }
     }
 
     deleteProject(project) {
         this.projectManager.deleteProject(project);
-        this.resetInterface(true);
-        this.buildInterface();
+        this.resetInterface(null);
     }
 }
